@@ -3,7 +3,7 @@
 //#include"node.h"
 using namespace std;
 int MinSep;
-int rightmost[10] = {-10000,-10000,-10000,-10000,-10000,-10000,-10000,-10000,-10000,-10000};
+vector <int> rightmost;
 
 void drawPoint(int x, int y)
 {
@@ -75,10 +75,14 @@ Node* createBST(Node* root, int n){
 void setCoordinates(Node* root, int x, int y){
 	if(!root)
 		return;
+	int sz = rightmost.size();
+	if(-y>= sz)
+		rightmost.push_back(-100000);
 	if(x - rightmost[-y] < MinSep)
 		x = rightmost[-y]+MinSep;
 	root->set_x(x);
 	root->set_y(y);
+	rightmost[-y]=x;
 	if(root->getLeftChild())
 		setCoordinates(root->getLeftChild(), x-MinSep/2, y-1);
 	if(root->getRightChild())
@@ -88,11 +92,13 @@ void setCoordinates(Node* root, int x, int y){
 		int midx = root->getRightChild()->get_x() + root->getLeftChild()->get_x();
 		midx/=2;
 		root->set_x(midx);
+		rightmost[-y]=midx;
 	}
 	else if(root->getLeftChild())
 	{
 		int midx = root->getLeftChild()->get_x() + MinSep/2;
 		root->set_x(midx);
+		rightmost[-y]=midx;
 	}
 }
 
