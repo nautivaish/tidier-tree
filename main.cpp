@@ -1,7 +1,6 @@
-#include<bits/stdc++.h>
-//#include <GL/glut.h>
-//#include"node.h"
-//#include"glutFunctions.h"
+#include<stdio.h>
+#include<chrono>
+
 #include"functions.h"
 using namespace std;
 
@@ -36,13 +35,13 @@ void drawTree(Node* root){
 void drawScene()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
-    glColor3f(1.0, 1.0, 1.0);
+	glColor3f(1.0, 1.0, 1.0);
     // drawLine(-100,0,100,0);
     // drawLine(0,-100,0,100);
 
-    drawTree(root);
+	drawTree(root);
 
-    glFlush();
+	glFlush();
 
 }
 
@@ -51,15 +50,30 @@ void drawScene()
 
 int main(int argc, char** argv)
 {
-	int n;
+	int n,MinS;
 	cout<<"enter the no. of nodes\n";
 	cin>>n;
-	root = createBST(root,n);
+	int bstarray[n];
+	cout<<"enter the BST array\n";
+	for(int i=0; i<n; i++)
+	{
+		cin>>bstarray[i];
+	}
+	cout<<"enter the minimum separation you want between any two nodes\n";
+    cin>>MinS;
+	auto start = chrono::high_resolution_clock::now(); 
+
+	root = createBST(root,n,bstarray,MinS);
 	setCoordinates(root,0,0);
+
+	auto stop = chrono::high_resolution_clock::now(); 
+	auto duration = chrono::duration_cast<chrono::microseconds>(stop - start); 
+	cout << duration.count() << " microseconds" << endl; 
+
 
 	glutInit(&argc, argv); /* initialize GLUT system */
 
-    glutInitDisplayMode(GLUT_RGB);
+	glutInitDisplayMode(GLUT_RGB);
     glutInitWindowSize(800, 1000); /* width=400pixels height=500pixels */
     glutCreateWindow("BST");     /* create window */
 
@@ -72,6 +86,6 @@ int main(int argc, char** argv)
 
     glutMainLoop(); /* start processing events... */
 
-    
-    return 0;
+
+	return 0;
 }

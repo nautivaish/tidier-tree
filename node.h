@@ -1,4 +1,5 @@
-#include<bits/stdc++.h>
+#include<stdlib.h>
+#include<limits.h>
 using namespace std;
 
 class Node{ 

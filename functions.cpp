@@ -1,6 +1,5 @@
 #include"functions.h"
-//#include"glutFunctions.h"
-//#include"node.h"
+
 using namespace std;
 int MinSep;
 vector <int> rightmost;
@@ -30,14 +29,7 @@ void drawCircle(int x, int y){
 }
 
 
-Node* createBST(Node* root, int n){
-	int bstarray[n];
-	cout<<"enter the BST array\n";
-	for(int i=0; i<n; i++)
-	{
-		cin>>bstarray[i];
-	}
-
+Node* createBST(Node* root, int n, int bstarray[],int MinS){
 	int i,j;
     Node *temp = new Node();
     for(i=0;i<n;i++)
@@ -66,9 +58,8 @@ Node* createBST(Node* root, int n){
         	temp->set_right(bstarray[i]);
         }
     }
-
-    cout<<"enter the minimum separation you want between any two nodes\n";
-    cin>>MinSep;
+    MinSep=MinS;
+    
 	return root;
 }
 

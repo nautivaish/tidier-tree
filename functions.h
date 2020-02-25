@@ -1,10 +1,10 @@
-#include<bits/stdc++.h>
-//#include"glutFunctions.h"
+#include<vector>
 #include <GL/glut.h>
+#include<iostream>
 #include"node.h"
 
 using namespace std;
-Node* createBST(Node* root, int n);
+Node* createBST(Node* root, int n,int bstarray[],int MinSep);
 void setCoordinates(Node* root, int x, int y);
 //void drawTree(Node* root);
 
